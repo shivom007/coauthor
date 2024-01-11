@@ -33,6 +33,7 @@ const defaultValue = ""
 
 io.on("connection", socket => {
   //  const socket = socket;
+  
   socket.on("get-document", async documentId => {
     const document = await findOrCreateDocument(documentId)
     socket.join(documentId)
@@ -51,7 +52,7 @@ io.on("connection", socket => {
 
   socket.on('disconnect', () => {
     console.log('disconnected', socket.id)
-    // socket.rooms = socket.rooms.filter((room) => room !== socket.id)
+    socket.rooms = socket.rooms.filter((room) => room !== socket.id)
 
   })
 })

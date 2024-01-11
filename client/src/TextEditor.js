@@ -40,7 +40,7 @@ const TextEditor = () => {
 
   useEffect(() => {
     if (socket === null || quill === null) return;
-    console.log(socket);
+    
     socket.on("load-document", (document) => {
       quill.setContents(document);
       quill.enable();
@@ -53,7 +53,9 @@ const TextEditor = () => {
     if (socket == null || quill == null) return;
     const handler = (delta, oldDelta, source) => {
       if (source !== "user") return;
+      
       socket.emit("send-changes", delta);
+      
     };
     quill.on("text-change", handler);
 
