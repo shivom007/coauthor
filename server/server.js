@@ -52,7 +52,7 @@ io.on("connection", socket => {
 
   socket.on('disconnect', () => {
     console.log('disconnected', socket.id)
-    socket.rooms = socket.rooms.filter((room) => room !== socket.id)
+    // socket.rooms = socket.rooms.filter((room) => room !== socket.id)
 
   })
 })

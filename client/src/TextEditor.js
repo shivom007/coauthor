@@ -31,7 +31,7 @@ const TextEditor = () => {
   const wrapperRef = useRef(null);
 
   useEffect(() => {
-    const conn = io(process.env.REACT_APP_URL, options);
+    const conn = io("https://coauthor-vbvro8zi.b4a.run", options);
     setSocket(conn);
     return () => {
       conn.disconnect();
