@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import "quill/dist/quill.snow.css";
 import { useParams } from "react-router-dom";
 
-const SAVE_INTERVAL_MS = 500;
+const SAVE_INTERVAL_MS = 1000 * 5;
 
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
