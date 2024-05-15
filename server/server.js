@@ -55,12 +55,7 @@ io.on("connection", socket => {
 
   socket.on('disconnect', () => {
     console.log('disconnected', socket.id)
-    for (const room in socket.rooms) {
-      if (room !== socket.id) { // Exclude the socket's own id
-          socket.leave(room);
-          console.log(`Left room: ${room}`);
-      }
-  }
+  
    })
 })
 
