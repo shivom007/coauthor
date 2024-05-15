@@ -3,7 +3,8 @@ import Quill from "quill";
 import { io } from "socket.io-client";
 import "quill/dist/quill.snow.css";
 import { useParams } from "react-router-dom";
-import video from "./task3.mp4";
+
+
 const SAVE_INTERVAL_MS = 1000 * 5;
 
 const TOOLBAR_OPTIONS = [
