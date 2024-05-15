@@ -32,17 +32,20 @@ const io = new Server(httpServer, {
 const defaultValue = ""
 
 io.on("connection", socket => {
-  //  const socket = socket;
+  console.log(socket.id)
   
   socket.on("get-document", async documentId => {
+  
+    console.log("document ",documentId)
+    let doc = documentId
     const document = await findOrCreateDocument(documentId)
     socket.join(documentId)
-    console.log(socket.id)
-    socket.emit("load-document", document.data );
-   
+    // console.log(socket.id)
+    io.to(documentId).emit("load-document", document.data );
+     console.log('load document')
 
     socket.on("send-changes", delta => {
-      socket.broadcast.emit("receive-changes", delta)
+      socket.to(documentId).emit("receive-changes", delta)
     })
 
     socket.on("save-document", async data => {
@@ -52,9 +55,13 @@ io.on("connection", socket => {
 
   socket.on('disconnect', () => {
     console.log('disconnected', socket.id)
-    // socket.rooms = socket.rooms.filter((room) => room !== socket.id)
-
-  })
+    for (const room in socket.rooms) {
+      if (room !== socket.id) { // Exclude the socket's own id
+          socket.leave(room);
+          console.log(`Left room: ${room}`);
+      }
+  }
+   })
 })
 
 async function findOrCreateDocument(id) {
